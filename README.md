@@ -4,6 +4,12 @@
 
 Artefacto web de la colección **Alchemy of Meaning (Alquimia del Significado)**. Convierte imágenes en una nube de puntos en 3D y la lee con un barrido que genera sonido: luminosidad, bordes y posición se traducen en notas, timbres, un bordón continuo y un espectro visible. Puede funcionar solo (Autopilot) como instalación permanente.
 
+## Capturas
+
+![Pantalla de inicio](capturas/01-inicio.png)
+![Modo edición](capturas/02-edicion.png)
+![HUD mínimo (tecla h)](capturas/03-hud-minimo.png)
+
 ## Uso
 
 1. Abre `index.html` en el navegador (o la versión en línea) y pulsa **sonar**. Eso activa el audio y entra en modo edición, con todas las ventanas.
@@ -43,6 +49,12 @@ Licencia GPL-3.0 (ver `LICENSE`).
 ## English
 
 A web artefact from the **Alchemy of Meaning (Alquimia del Significado)** collection. It turns images into a 3D point cloud and reads it with a sweep that generates sound: luminosity, edges and position become notes, timbres, a continuous drone and a live spectrum. It can run unattended (Autopilot) as a permanent installation.
+
+### Screenshots
+
+![Start screen](capturas/01-inicio.png)
+![Edit mode](capturas/02-edicion.png)
+![Minimal HUD (key h)](capturas/03-hud-minimo.png)
 
 ### Usage
 
