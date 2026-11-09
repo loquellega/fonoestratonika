@@ -1,0 +1,44 @@
+/* Alchemy of Meaning · UI — tokens (v1)
+   Diseño, investigación y desarrollo: Héctor Cruz Juárez — https://hectorcruz.com.mx
+   Todo lo demás en components.css lee estas variables: para cambiar la apariencia de un
+   artefacto se cambia solo este bloque. */
+:root{
+  /* superficies */
+  --a-bg:#0a0a0a;          /* escena / fondo */
+  --a-panel:#101010;       /* cuerpo de ventana */
+  --a-bar:#1c1c1c;         /* barra de título */
+  --a-line:#2e2e2e;        /* separadores y bordes de ventana */
+  --a-line-ctl:#3a3a3a;    /* bordes de controles */
+  --a-hover:#1f1f1f;       /* fondo de control al pasar el cursor */
+
+  /* tinta */
+  --a-ink:#d2d2d2;         /* texto */
+  --a-ink-strong:#ffffff;  /* valores, selección */
+  --a-ink-dim:#8f8f8f;     /* etiquetas (5.9:1 sobre --a-panel) */
+
+  /* acento: solo para lo vivo o principal (sonar/detener, modo activo, selección, progreso) */
+  --a-accent:#76c411;
+  --a-accent-ink:#a5e04a;  /* texto sobre --a-accent-bg */
+  --a-accent-bg:#1b2512;   /* fondo de elemento activo / seleccionado */
+
+  /* forma y ritmo */
+  --a-radius:3px;
+  --a-radius-sm:2px;
+  --a-gap:8px;
+  --a-pad:10px;
+  --a-bar-h:24px;
+  --a-ctl-h:32px;
+  --a-t:120ms;             /* transiciones: solo color y borde */
+
+  /* tipografía */
+  --a-font:Inter,Arial,Helvetica,sans-serif;
+  --a-size:12px;
+  --a-size-sm:11px;
+}
+
+/* Contraste «alto» (opcional, para pantallas con mucha luz ambiente) */
+:root[data-contrast="alto"]{
+  --a-bg:#000;--a-panel:#000;--a-bar:#fff;--a-line:#fff;--a-line-ctl:#fff;--a-hover:#262626;
+  --a-ink:#fff;--a-ink-dim:#a8a8a8;
+}
+:root[data-contrast="alto"] .a-tb{color:#000}

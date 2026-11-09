@@ -1,0 +1,60 @@
+/* Alchemy of Meaning · UI — componentes (v1). Requiere tokens.css antes.
+   Prefijo a- para convivir con el CSS existente de cada artefacto. */
+
+.a-ui{font:400 var(--a-size)/1.5 var(--a-font);color:var(--a-ink);background:var(--a-bg);
+  font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+
+/* Ventana: barra de título + cuerpo */
+.a-win{border:1px solid var(--a-line);border-radius:var(--a-radius);background:var(--a-panel);overflow:hidden}
+.a-tb{display:flex;justify-content:space-between;align-items:center;height:var(--a-bar-h);padding:0 var(--a-pad);
+  background:var(--a-bar);border-bottom:1px solid var(--a-line);color:var(--a-ink);
+  font-size:var(--a-size-sm);font-weight:500;letter-spacing:.02em;cursor:grab;user-select:none;touch-action:none}
+.a-tb button{background:none;border:0;color:var(--a-ink-dim);padding:0 2px;cursor:pointer;font-size:var(--a-size-sm)}
+.a-tb button:hover{color:var(--a-ink-strong)}
+.a-wb{padding:var(--a-pad);display:flex;flex-direction:column;gap:var(--a-pad)}
+.a-win.min .a-wb{display:none}
+
+/* Lecturas: etiqueta tenue, valor claro */
+.a-row{display:flex;justify-content:space-between;align-items:center;gap:var(--a-gap)}
+.a-lbl{color:var(--a-ink-dim);font-size:var(--a-size-sm)}
+.a-val{color:var(--a-ink-strong)}
+
+/* Botón, alternador */
+.a-btn{min-height:var(--a-ctl-h);padding:0 12px;background:transparent;color:var(--a-ink);
+  border:1px solid var(--a-line-ctl);border-radius:var(--a-radius);font:inherit;cursor:pointer;white-space:nowrap;
+  transition:background var(--a-t),border-color var(--a-t),color var(--a-t)}
+.a-btn:hover{background:var(--a-hover);border-color:#555}
+.a-btn[aria-pressed="true"],.a-btn.on{background:var(--a-accent-bg);border-color:var(--a-accent);color:var(--a-accent-ink)}
+.a-btn.primary{background:var(--a-accent);border-color:var(--a-accent);color:#0a0a0a;font-weight:600}
+.a-btn.primary:hover{filter:brightness(1.08)}
+:focus-visible{outline:2px solid var(--a-accent);outline-offset:2px}
+
+/* Selector segmentado: el activo va en tinta clara, no en verde (verde = vivo) */
+.a-seg{display:inline-flex;border:1px solid var(--a-line-ctl);border-radius:var(--a-radius);overflow:hidden}
+.a-seg .a-btn{border:0;border-radius:0;border-left:1px solid var(--a-line-ctl)}
+.a-seg .a-btn:first-child{border-left:0}
+.a-seg .a-btn[aria-pressed="true"]{background:var(--a-ink);color:#0a0a0a;font-weight:500}
+
+/* Deslizador: línea de 2 px con relleno de acento y tirador rectangular */
+.a-range{-webkit-appearance:none;appearance:none;width:100%;height:18px;margin:0;background:transparent}
+.a-range::-webkit-slider-runnable-track{height:2px;border-radius:1px;
+  background:linear-gradient(to right,var(--a-accent) var(--fill,0%),var(--a-line) var(--fill,0%))}
+.a-range::-webkit-slider-thumb{-webkit-appearance:none;width:6px;height:14px;margin-top:-6px;border:0;border-radius:1px;background:var(--a-ink-strong)}
+.a-range::-moz-range-track{height:2px;background:var(--a-line)}
+.a-range::-moz-range-progress{height:2px;background:var(--a-accent)}
+.a-range::-moz-range-thumb{width:6px;height:14px;border:0;border-radius:1px;background:var(--a-ink-strong)}
+/* JS mínimo: range.style.setProperty('--fill', (v-min)/(max-min)*100+'%') en 'input' */
+
+/* Medidor fino (sustituye ■□) */
+.a-meter{display:block;width:64px;height:3px;border-radius:2px;background:var(--a-line);position:relative;overflow:hidden}
+.a-meter>i{position:absolute;inset:0 auto 0 0;width:calc(var(--v,0)*100%);background:var(--a-accent);transition:width .6s}
+
+/* Fila seleccionable con miniatura */
+.a-item{display:flex;gap:var(--a-pad);align-items:center;padding:5px;border:1px solid transparent;border-radius:var(--a-radius-sm)}
+.a-item[aria-selected="true"]{background:var(--a-accent-bg);border-color:var(--a-accent);color:var(--a-ink-strong)}
+.a-item img{width:38px;height:28px;object-fit:cover;border-radius:1px;filter:grayscale(1)}
+
+/* Barra de scroll discreta (nunca la nativa clara) */
+.a-scroll{scrollbar-width:thin;scrollbar-color:var(--a-line-ctl) transparent}
+.a-scroll-hidden{scrollbar-width:none}
+.a-scroll-hidden::-webkit-scrollbar{display:none;height:0}
