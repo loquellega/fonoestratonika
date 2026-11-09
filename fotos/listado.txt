@@ -1,0 +1,14 @@
+# Lista de fotos de la galería, una por línea, en el orden en que deben aparecer.
+# Las líneas que empiezan con # se ignoran. Déjalo vacío (como está ahora)
+# y la app usa sus 3 imágenes de muestra generadas.
+#
+# Para usar tus propias fotos:
+#  1. Copia tus archivos (jpg o png) a esta misma carpeta "fotos".
+#  2. Borra el símbolo # al inicio de cada línea de abajo y ajusta los
+#     nombres exactos de tus archivos (o añade/quita líneas según cuántas
+#     fotos tengas). El orden de las líneas es el orden en que aparecerán.
+#  3. Sube la carpeta "fotos" junto con index.html a tu host.
+#
+# ejemplo01.jpg
+# ejemplo02.jpg
+# ejemplo03.jpg

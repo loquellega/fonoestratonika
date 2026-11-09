@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+node_modules/
+*.zip
+# tus fotos personales (déjalas fuera del repo si no quieres publicarlas)
+fotos/*.jpg
+fotos/*.jpeg
+fotos/*.png
