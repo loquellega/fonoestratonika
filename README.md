@@ -25,6 +25,13 @@ Se estrenó en el simposio Baja Rare, dedicado a la flora rara y endémica de la
 
 Los tres timbres se sintetizan en vivo, sin grabaciones. La campana usa parciales inarmónicos con cola larga, el piano usa FM suave con golpe de martillo y el bambú una ráfaga de ruido con resonador afinado.
 
+**Clavos (v080).** Idea de Maximiliano Wille. Las 88 teclas del piano se reparten en partes iguales entre los puntos de la foto. Cuando suena una nota, del generador, del teclado o del bordón, sus puntos suben hacia el frente con una línea fina, crecen y se encienden, como los tableros de clavos que toman el molde de una mano. Hay tres repartos:
+- **altura:** grave abajo, agudo arriba.
+- **luz:** grave en lo oscuro, agudo en lo claro.
+- **disperso:** cada tecla salpicada por toda la imagen.
+
+En altura y luz cada nota también empuja un poco a sus vecinas, como la presión de un dedo. Las campanas duran más que el piano y el bambú, y el bordón sostiene sus clavos mientras suena. Se ajusta en la ventana **Nube**: clavos, reparto, altura del clavo y cola. «Marcas» vuelve a mostrar los círculos de antes.
+
 **4. El bordón.** Es una voz sostenida de siete osciladores: cuerpo, sub, sierras desafinadas, quinta y octava, pasados por un filtro que respira con un LFO lento. Se toca sobre la imagen: la altura va en vertical y el volumen y el brillo en horizontal. Cada dedo extra suma un grado (terceras, cuartas, racimo u octavas). También se toca con teclado MIDI, hasta 4 notas a la vez. La ventana **Bordón — voz** abre toda su mezcla, el filtro, la respiración, el ataque y la caída.
 
 **5. Paisaje.** Una capa opcional de viento, oleaje, marea, aves y desierto, también sintetizada. Se siembra desde el color y la textura de cada foto: los azules traen agua, los verdes aves y los cálidos desierto.
@@ -76,6 +83,7 @@ y abrir `http://localhost:8000/`. Funciona sin conexión (Inter se carga de Goog
 |---|---|---|
 | ![Inicio](docs/capturas/01-inicio.png)<br>Pantalla de inicio / Start screen | ![Edición](docs/capturas/02-edicion.png)<br>Modo edición / Edit mode | ![HUD mínimo](docs/capturas/03-hud-minimo.png)<br>HUD mínimo (tecla h) / Minimal HUD (key h) |
 | ![Enlace OSC · MIDI](docs/capturas/04-enlace-osc-midi.png)<br>Enlace OSC · MIDI / OSC · MIDI link | ![Bordón y voz](docs/capturas/05-bordon-voz.png)<br>Bordón y su voz / Drone and its voice | ![MIDI learn](docs/capturas/06-midi-learn.png)<br>MIDI learn |
+| ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | | |
 
 ## Estilo
 
@@ -83,6 +91,7 @@ La interfaz sigue el skill [`alchemy-ui`](skills/alchemy-ui/SKILL.md) (tokens y 
 
 ## Versión
 
+v080: clavos (cada nota levanta sus puntos de la nube; idea de Maximiliano Wille).
 v079: teclado MIDI (bordón polifónico, dividido, pedal, pitch bend, aftertouch, MIDI learn) y voz del bordón abierta.
 v078: enlace OSC · MIDI (envía y recibe) y puente OSC.
 
@@ -110,6 +119,13 @@ It premiered at the Baja Rare symposium on rare and endemic flora of the peninsu
 - **Mystery:** now and then a tension note appears, a minor second or a tritone. It happens more often in dark photos and always on the bell.
 
 All three timbres are synthesized live, without samples. The bell uses inharmonic partials with a long tail, the piano soft FM with a hammer strike, and the bamboo a noise burst through a tuned resonator.
+
+**Pins (v080).** An idea by Maximiliano Wille. The 88 piano keys are shared out equally among the photo's points. When a note sounds, whether from the generator, the keyboard or the drone, its points rise toward the viewer on a thin line, grow and light up, like a pin-art toy taking the mould of a hand. There are three layouts:
+- **altura** (height): low at the bottom, high at the top.
+- **luz** (light): low in the dark areas, high in the bright ones.
+- **disperso** (scattered): each key sprinkled across the whole image.
+
+In height and light layouts each note also nudges its neighbours, like finger pressure. Bells last longer than piano and bamboo, and the drone holds its pins while it sounds. Set it in the **Nube** window: pins, layout, pin height and tail. "Marcas" brings back the old circles.
 
 **4. The drone.** A sustained voice of seven oscillators: body, sub, detuned saws, fifth and octave, through a filter that breathes with a slow LFO. You play it on the image, with pitch on the vertical axis and volume and brightness on the horizontal. Each extra finger adds a degree (thirds, fourths, cluster or octaves). It also plays from a MIDI keyboard, up to 4 notes at once. The **Bordón — voz** window opens its whole mix, filter, breathing, attack and release.
 
@@ -162,6 +178,7 @@ The UI follows the [`alchemy-ui`](skills/alchemy-ui/SKILL.md) skill (reusable to
 
 ### Version
 
+v080: pins (each note lifts its points in the cloud; idea by Maximiliano Wille).
 v079: MIDI keyboard (polyphonic drone, split, sustain, pitch bend, aftertouch, MIDI learn) and open drone voice.
 v078: OSC · MIDI link (send and receive) and OSC bridge.
 

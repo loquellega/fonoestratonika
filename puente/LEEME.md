@@ -1,4 +1,4 @@
-# Fonoestratonika v079 · enlace OSC · MIDI
+# Fonoestratonika v080 · enlace OSC · MIDI
 
 Así se usa Fonoestratonika como instrumento dentro de otro sistema (Isadora, TouchDesigner, Max, Ableton, un sinte): envía sus notas y datos, y recibe control desde fuera.
 
@@ -75,11 +75,12 @@ Los datos continuos solo se envían cuando cambian.
 | `/fono/note` | timbre 0–2 · nota MIDI · velocidad (0–1 o 0–127) |
 | `/fono/drone` | nota MIDI · amplitud (0 suelta esa nota); hasta 4 a la vez |
 | `/fono/release` | suelta el bordón |
+| `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso |
 | `/fono/tick` | avanza un paso (con «seguir reloj externo») |
 | `/fono/<deslizador>` | valor en sus unidades, p. ej. `/fono/gdens 0.7`, `/fono/speed 30` |
 | `/fono/norm/<deslizador>` | 0–1 mapeado a su rango, p. ej. `/fono/norm/rev 0.5` |
 
-Deslizadores: `dCore dSub dSaw dFifth dOct dDetune dCut dRes dBreath dBreathD dAtk dRel pos speed vol gdens gtempo myst gvol pad rev bright noise thr width img oct rest glide range fade lvol density depth size apBpm every` y los de película (`fContrast fGrain`…).
+Deslizadores: `pinH pinTail dCore dSub dSaw dFifth dOct dDetune dCut dRes dBreath dBreathD dAtk dRel pos speed vol gdens gtempo myst gvol pad rev bright noise thr width img oct rest glide range fade lvol density depth size apBpm every` y los de película (`fContrast fGrain`…).
 
 Con «tonalidad de la imagen» encendido, cada foto nueva vuelve a fijar su tónica y su escala. Apágalo si quieres llevar la tonalidad desde fuera.
 
