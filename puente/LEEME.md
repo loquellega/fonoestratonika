@@ -1,4 +1,4 @@
-# Fonoestratonika v080 · enlace OSC · MIDI
+# Fonoestratonika v081 · enlace OSC · MIDI
 
 Así se usa Fonoestratonika como instrumento dentro de otro sistema (Isadora, TouchDesigner, Max, Ableton, un sinte): envía sus notas y datos, y recibe control desde fuera.
 
@@ -58,6 +58,7 @@ Para tocar a distancia por **Tailscale**, añade la IP 100.x de la otra máquina
 | `/fono/image` | `i` índice · `s` nombre | al cambiar de foto |
 | `/fono/feat` | `f` tono · `f` saturación · `f` luz media · `f` contraste · `f` bordes | al cambiar de foto |
 | `/fono/key` | `i` tónica 0–11 · `i` escala 0–5 | al cambiar la tonalidad |
+| `/fono/tension` | `f` 0 consonante … 1 disonante | tensión armónica de las notas que suenan juntas |
 
 Los datos continuos solo se envían cuando cambian.
 
@@ -75,7 +76,8 @@ Los datos continuos solo se envían cuando cambian.
 | `/fono/note` | timbre 0–2 · nota MIDI · velocidad (0–1 o 0–127) |
 | `/fono/drone` | nota MIDI · amplitud (0 suelta esa nota); hasta 4 a la vez |
 | `/fono/release` | suelta el bordón |
-| `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso |
+| `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso, 3 teclado · `/fono/pinAxis` 0 frente, 1 arriba |
+| `/fono/pinHarm` · `/fono/pinForm` · `/fono/pinColor` | 1/0 armonía, formas por timbre, color por nota |
 | `/fono/tick` | avanza un paso (con «seguir reloj externo») |
 | `/fono/<deslizador>` | valor en sus unidades, p. ej. `/fono/gdens 0.7`, `/fono/speed 30` |
 | `/fono/norm/<deslizador>` | 0–1 mapeado a su rango, p. ej. `/fono/norm/rev 0.5` |
@@ -89,7 +91,7 @@ Con «tonalidad de la imagen» encendido, cada foto nueva vuelve a fijar su tón
 **Sale**
 - Canal 1 campana · 2 piano · 3 bambú: nota con su velocidad y su duración.
 - Canal 4: bordón sostenido.
-- Canal 5, CC 20 pos · 21–24 bandas · 25 nivel · 26 bordes · 27 centroide · 28 activos · 29–33 rasgos de la foto (tono, saturación, luz, contraste, bordes). Program change = índice de la foto.
+- Canal 5, CC 20 pos · 21–24 bandas · 25 nivel · 26 bordes · 27 centroide · 28 activos · 34 tensión armónica · 29–33 rasgos de la foto (tono, saturación, luz, contraste, bordes). Program change = índice de la foto.
 - Reloj MIDI, si está activo.
 
 **Entra**

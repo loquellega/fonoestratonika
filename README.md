@@ -30,7 +30,11 @@ Los tres timbres se sintetizan en vivo, sin grabaciones. La campana usa parciale
 - **luz:** grave en lo oscuro, agudo en lo claro.
 - **disperso:** cada tecla salpicada por toda la imagen.
 
-En altura y luz cada nota también empuja un poco a sus vecinas, como la presión de un dedo. Las campanas duran más que el piano y el bambú, y el bordón sostiene sus clavos mientras suena. Se ajusta en la ventana **Nube**: clavos, reparto, altura del clavo y cola. «Marcas» vuelve a mostrar los círculos de antes.
+Desde v081 también hay un reparto **teclado** (grave a la izquierda, agudo a la derecha). En todos los repartos menos disperso, cada nota empuja un poco a sus vecinas, como la presión de un dedo. Además:
+- La fuerza de la tecla (velocity) decide cuánto sube y crece cada clavo. Los clavos pueden subir **al frente** (eje z) o **hacia arriba**.
+- **Armonía:** las notas que suenan juntas se unen con líneas entre sus zonas. Si consuenan (octavas, quintas, terceras), la línea es firme y la zona se recoge. Si chocan (segundas, tritono), la zona se abre, tiembla y la línea se vuelve punteada. La tensión armónica también sale por OSC (`/fono/tension`) y por el CC 34.
+- **Formas por timbre:** la campana lleva satélites que giran, el piano es un cuadrado, el bambú salta en granos y el bordón tiene un halo que respira.
+- **Color por nota** (opcional): cada clase de altura toma un color siguiendo el círculo de quintas, así las notas cercanas en armonía tienen colores cercanos. Las campanas duran más que el piano y el bambú, y el bordón sostiene sus clavos mientras suena. Se ajusta en la ventana **Nube**: clavos, reparto, altura del clavo y cola. «Marcas» vuelve a mostrar los círculos de antes.
 
 **4. El bordón.** Es una voz sostenida de siete osciladores: cuerpo, sub, sierras desafinadas, quinta y octava, pasados por un filtro que respira con un LFO lento. Se toca sobre la imagen: la altura va en vertical y el volumen y el brillo en horizontal. Cada dedo extra suma un grado (terceras, cuartas, racimo u octavas). También se toca con teclado MIDI, hasta 4 notas a la vez. La ventana **Bordón — voz** abre toda su mezcla, el filtro, la respiración, el ataque y la caída.
 
@@ -83,7 +87,7 @@ y abrir `http://localhost:8000/`. Funciona sin conexión (Inter se carga de Goog
 |---|---|---|
 | ![Inicio](docs/capturas/01-inicio.png)<br>Pantalla de inicio / Start screen | ![Edición](docs/capturas/02-edicion.png)<br>Modo edición / Edit mode | ![HUD mínimo](docs/capturas/03-hud-minimo.png)<br>HUD mínimo (tecla h) / Minimal HUD (key h) |
 | ![Enlace OSC · MIDI](docs/capturas/04-enlace-osc-midi.png)<br>Enlace OSC · MIDI / OSC · MIDI link | ![Bordón y voz](docs/capturas/05-bordon-voz.png)<br>Bordón y su voz / Drone and its voice | ![MIDI learn](docs/capturas/06-midi-learn.png)<br>MIDI learn |
-| ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | | |
+| ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | ![Armonía y color](docs/capturas/08-armonia-color.png)<br>Armonía y color por nota / Harmony and colour by note | |
 
 ## Estilo
 
@@ -91,6 +95,7 @@ La interfaz sigue el skill [`alchemy-ui`](skills/alchemy-ui/SKILL.md) (tokens y 
 
 ## Versión
 
+v081: clavos con reparto teclado, eje frente/arriba, armonía (líneas, cohesión y temblor), formas por timbre y color por nota.
 v080: clavos (cada nota levanta sus puntos de la nube; idea de Maximiliano Wille).
 v079: teclado MIDI (bordón polifónico, dividido, pedal, pitch bend, aftertouch, MIDI learn) y voz del bordón abierta.
 v078: enlace OSC · MIDI (envía y recibe) y puente OSC.
@@ -125,7 +130,11 @@ All three timbres are synthesized live, without samples. The bell uses inharmoni
 - **luz** (light): low in the dark areas, high in the bright ones.
 - **disperso** (scattered): each key sprinkled across the whole image.
 
-In height and light layouts each note also nudges its neighbours, like finger pressure. Bells last longer than piano and bamboo, and the drone holds its pins while it sounds. Set it in the **Nube** window: pins, layout, pin height and tail. "Marcas" brings back the old circles.
+Since v081 there is also a **teclado** (keyboard) layout, with low notes on the left and high on the right. In every layout except scattered, each note nudges its neighbours, like finger pressure. Also:
+- Key velocity sets how far each pin rises and grows. Pins can rise **toward the viewer** (z axis) or **upward**.
+- **Harmony:** notes sounding together are joined by lines between their zones. Consonant intervals (octaves, fifths, thirds) give firm lines and the zone draws in. Clashing ones (seconds, tritone) open the zone, make it tremble and dash the line. Harmonic tension is also sent over OSC (`/fono/tension`) and CC 34.
+- **Shapes by timbre:** the bell gets orbiting satellites, the piano is a square, the bamboo jumps in grains and the drone has a breathing halo.
+- **Colour by note** (optional): each pitch class gets a hue around the circle of fifths, so harmonically close notes share close colours. Bells last longer than piano and bamboo, and the drone holds its pins while it sounds. Set it in the **Nube** window: pins, layout, pin height and tail. "Marcas" brings back the old circles.
 
 **4. The drone.** A sustained voice of seven oscillators: body, sub, detuned saws, fifth and octave, through a filter that breathes with a slow LFO. You play it on the image, with pitch on the vertical axis and volume and brightness on the horizontal. Each extra finger adds a degree (thirds, fourths, cluster or octaves). It also plays from a MIDI keyboard, up to 4 notes at once. The **Bordón — voz** window opens its whole mix, filter, breathing, attack and release.
 
@@ -178,6 +187,7 @@ The UI follows the [`alchemy-ui`](skills/alchemy-ui/SKILL.md) skill (reusable to
 
 ### Version
 
+v081: pins with keyboard layout, front/up axis, harmony (lines, cohesion and tremble), shapes by timbre and colour by note.
 v080: pins (each note lifts its points in the cloud; idea by Maximiliano Wille).
 v079: MIDI keyboard (polyphonic drone, split, sustain, pitch bend, aftertouch, MIDI learn) and open drone voice.
 v078: OSC · MIDI link (send and receive) and OSC bridge.
