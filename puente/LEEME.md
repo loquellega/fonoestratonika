@@ -1,4 +1,4 @@
-# Fonoestratonika v081 · enlace OSC · MIDI
+# Fonoestratonika v083 · enlace OSC · MIDI
 
 Así se usa Fonoestratonika como instrumento dentro de otro sistema (Isadora, TouchDesigner, Max, Ableton, un sinte): envía sus notas y datos, y recibe control desde fuera.
 
@@ -58,7 +58,7 @@ Para tocar a distancia por **Tailscale**, añade la IP 100.x de la otra máquina
 | `/fono/image` | `i` índice · `s` nombre | al cambiar de foto |
 | `/fono/feat` | `f` tono · `f` saturación · `f` luz media · `f` contraste · `f` bordes | al cambiar de foto |
 | `/fono/key` | `i` tónica 0–11 · `i` escala 0–5 | al cambiar la tonalidad |
-| `/fono/tension` | `f` 0 consonante … 1 disonante | tensión armónica de las notas que suenan juntas |
+| `/fono/tension` | `f` 0 consonante … 1 disonante | tensión armónica de las notas que suenan juntas (v083) |
 
 Los datos continuos solo se envían cuando cambian.
 
@@ -76,13 +76,19 @@ Los datos continuos solo se envían cuando cambian.
 | `/fono/note` | timbre 0–2 · nota MIDI · velocidad (0–1 o 0–127) |
 | `/fono/drone` | nota MIDI · amplitud (0 suelta esa nota); hasta 4 a la vez |
 | `/fono/release` | suelta el bordón |
-| `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso, 3 teclado · `/fono/pinAxis` 0 frente, 1 arriba |
-| `/fono/pinHarm` · `/fono/pinForm` · `/fono/pinColor` | 1/0 armonía, formas por timbre, color por nota |
+| `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso, 3 teclado (v082) |
+| `/fono/listen` · `/fono/pinSub` | 1/0 la nube escucha · subestructuras (v082) |
+| `/fono/pinHarm` · `/fono/pinColor` | 1/0 armonía · color por nota (v083) |
 | `/fono/tick` | avanza un paso (con «seguir reloj externo») |
+| `/fono/harm` · `/fono/hold` · `/fono/pat` · `/fono/morph` | 1/0 (v081: el teclado manda, hold, patrón, morph) |
+| `/fono/hnote` | nota MIDI · velocidad (0 suelta) — nota de armonía (v081) |
+| `/fono/hclear` | suelta el acorde de armonía (v081) |
+| `/fono/patLen` | 8, 16, 24 o 32 (v081) |
+| `/fono/corner` | 0–3: lleva el morph a la esquina A, B, C o D (v081) |
 | `/fono/<deslizador>` | valor en sus unidades, p. ej. `/fono/gdens 0.7`, `/fono/speed 30` |
 | `/fono/norm/<deslizador>` | 0–1 mapeado a su rango, p. ej. `/fono/norm/rev 0.5` |
 
-Deslizadores: `pinH pinTail dCore dSub dSaw dFifth dOct dDetune dCut dRes dBreath dBreathD dAtk dRel pos speed vol gdens gtempo myst gvol pad rev bright noise thr width img oct rest glide range fade lvol density depth size apBpm every` y los de película (`fContrast fGrain`…).
+Deslizadores (v081 suma `mx my bpmFix`; v082 suma `pinLift`): `pinH pinTail dCore dSub dSaw dFifth dOct dDetune dCut dRes dBreath dBreathD dAtk dRel pos speed vol gdens gtempo myst gvol pad rev bright noise thr width img oct rest glide range fade lvol density depth size apBpm every` y los de película (`fContrast fGrain`…).
 
 Con «tonalidad de la imagen» encendido, cada foto nueva vuelve a fijar su tónica y su escala. Apágalo si quieres llevar la tonalidad desde fuera.
 
@@ -125,6 +131,7 @@ El bordón por teclado es **polifónico**: hasta 4 notas sostenidas, cada una en
 | 15 | pasada | 80 | glissando |
 | 16 | ancho del barrido | 91 | reverb |
 | 17 | umbral | 94 | desafinado |
+| 18 | morph X (v081) | 19 | morph Y (v081) |
 
 *MIDI learn:* pulsa **aprender**, toca cualquier deslizador de la app y mueve una perilla o un fader. Queda asignado (perilla y canal) y tiene prioridad sobre la tabla. Se pueden asignar varios seguidos; **terminar** cierra el modo. Las asignaciones se guardan en el navegador y se borran con ×.
 

@@ -1,8 +1,10 @@
-# Fonoestratonika
+# Fonoestratonika · OSC · MIDI
 
 **Español** · [English](#english)
 
-![Fonoestratonika en modo edición](docs/capturas/02-edicion.png)
+![Fonoestratonika v081 en modo instrumento](docs/capturas/08-instrumento.png)
+
+> **Variante instrumento.** Este repo es la versión de Fonoestratonika pensada para que un músico la toque en vivo (morph XY, armonía desde el teclado, patrón tipo arpegiador y set de MIDI en archivo). Parte de la v080 de [loquellega/fonoestratonika](https://github.com/loquellega/fonoestratonika). Idea impulsada por Maximiliano Wille.
 
 Artefacto web de la colección **Alchemy of Meaning (Alquimia del Significado)**. Convierte fotografías en una nube de puntos en 3D y la lee con un barrido que genera sonido: luminosidad, bordes, color y posición se traducen en notas, timbres, un bordón continuo y un espectro visible. Puede funcionar solo (Autopilot) como instalación permanente, o tocarse como instrumento con el tacto, un teclado MIDI o desde Isadora y TouchDesigner por OSC.
 
@@ -30,11 +32,7 @@ Los tres timbres se sintetizan en vivo, sin grabaciones. La campana usa parciale
 - **luz:** grave en lo oscuro, agudo en lo claro.
 - **disperso:** cada tecla salpicada por toda la imagen.
 
-Desde v081 también hay un reparto **teclado** (grave a la izquierda, agudo a la derecha). En todos los repartos menos disperso, cada nota empuja un poco a sus vecinas, como la presión de un dedo. Además:
-- La fuerza de la tecla (velocity) decide cuánto sube y crece cada clavo. Los clavos pueden subir **al frente** (eje z) o **hacia arriba**.
-- **Armonía:** las notas que suenan juntas se unen con líneas entre sus zonas. Si consuenan (octavas, quintas, terceras), la línea es firme y la zona se recoge. Si chocan (segundas, tritono), la zona se abre, tiembla y la línea se vuelve punteada. La tensión armónica también sale por OSC (`/fono/tension`) y por el CC 34.
-- **Formas por timbre:** la campana lleva satélites que giran, el piano es un cuadrado, el bambú salta en granos y el bordón tiene un halo que respira.
-- **Color por nota** (opcional): cada clase de altura toma un color siguiendo el círculo de quintas, así las notas cercanas en armonía tienen colores cercanos. Las campanas duran más que el piano y el bambú, y el bordón sostiene sus clavos mientras suena. Se ajusta en la ventana **Nube**: clavos, reparto, altura del clavo y cola. «Marcas» vuelve a mostrar los círculos de antes.
+En altura y luz cada nota también empuja un poco a sus vecinas, como la presión de un dedo. Las campanas duran más que el piano y el bambú, y el bordón sostiene sus clavos mientras suena. Se ajusta en la ventana **Nube**: clavos, reparto, altura del clavo y cola. «Marcas» vuelve a mostrar los círculos de antes.
 
 **4. El bordón.** Es una voz sostenida de siete osciladores: cuerpo, sub, sierras desafinadas, quinta y octava, pasados por un filtro que respira con un LFO lento. Se toca sobre la imagen: la altura va en vertical y el volumen y el brillo en horizontal. Cada dedo extra suma un grado (terceras, cuartas, racimo u octavas). También se toca con teclado MIDI, hasta 4 notas a la vez. La ventana **Bordón — voz** abre toda su mezcla, el filtro, la respiración, el ataque y la caída.
 
@@ -71,6 +69,36 @@ node puente/puente.js --out 127.0.0.1:1234 --in 9001
 
 Luego abre `http://localhost:8080`. El puente sirve la app y acepta varios destinos, por ejemplo una IP de Tailscale para tocar a distancia. El mapa completo de direcciones, CC y canales está en [`puente/LEEME.md`](puente/LEEME.md).
 
+### Modo instrumento (v081)
+
+Pensado para que un músico, como Maximiliano Wille, toque Fonoestratonika en una función. Inspirado en el Easy/Morph, el arpegiador y la tabla de controladores de FM8. Son dos ventanas nuevas en el dock:
+
+**Instrumento — morph.** Un pad XY con cuatro esquinas. Cada esquina guarda un sonido: la voz del bordón, densidad, tempo, misterio, brillo, ruido de bordes, reverb, nube y clavos. El punto los mezcla. «Esquinas sugeridas» crea cuatro variantes del sonido actual (base, corto, ruido y metal) y los botones A–D guardan el sonido actual en una esquina. X e Y responden a los CC 18 y 19, a MIDI learn y a OSC (`/fono/mx`, `/fono/my`, `/fono/corner 0–3`, `/fono/morph 1/0`).
+
+**Instrumento — patrón.**
+- **El teclado manda:** abajo del corte (o en todo el teclado si no está en «dividido») tocas un acorde y el generador improvisa o arpegia sobre esas notas en lugar de la armonía de la foto. Sin teclas, espera, como un arpegiador. *Hold* deja sonar el acorde al soltar, *key sync* reinicia el patrón con cada acorde nuevo y «también al bordón» manda el acorde al bordón.
+- **Patrón:** de 8 a 32 pasos en 1/8 o 1/16, con filas de paso, acento, nota (1–4 del acorde, o «·» para que decida la foto), octava (−2 a +2) y transposición (0–11). Clic suma; shift o clic derecho resta. «Azar», «desde la foto» y «vaciar». El timbre, el paneo y la luz siguen saliendo de la foto.
+- **Tempo fijo:** de 30 a 200 bpm. Abajo de 30 se usa el tempo de la foto. Con 1/16, el reloj MIDI de entrada y salida va a 6 pulsos por paso.
+- OSC: `/fono/harm`, `/fono/hold`, `/fono/hnote nota vel` (vel 0 suelta), `/fono/hclear`, `/fono/pat`, `/fono/patLen`, `/fono/bpmFix`.
+
+**La nube escucha (v082).** El sonido transforma la nube, no solo la enciende:
+- **Reparto «teclado»:** las 88 teclas van de izquierda (grave) a derecha (agudo), como un piano visto de frente. Se suma a los repartos por altura, luz y disperso.
+- **Ejes:** la velocity empuja los clavos hacia el frente (eje Z), la intensidad los eleva mientras suenan (eje Y; deslizador «elevación»), el pitch bend los desvía hacia los lados y el aftertouch los ilumina.
+- **Subestructuras por timbre:** la campana abre anillos, el bambú se desgrana en polvo, el piano queda nítido y el bordón respira al ritmo de su LFO.
+- **Brillo y reverb:** el brillo vuelve los clavos más granulares (más subpuntos) y la reverb los dispersa más lejos.
+- La nube sigue en blanco: la intensidad se expresa en luz, no en color. Se apaga con «la nube escucha» y «subestructuras» en la ventana **Nube**, o por OSC con `/fono/listen` y `/fono/pinSub`.
+
+**Armonía (v083).** Cuando suenan varias notas juntas, la nube responde a la relación entre ellas:
+- Las zonas de las notas se unen con líneas.
+- Si consuenan (octavas, quintas, terceras), la línea es firme y las zonas se recogen.
+- Si chocan (segundas, tritono), las zonas se abren, tiemblan y la línea se vuelve punteada.
+- La tensión armónica, de 0 a 1, sale por OSC (`/fono/tension`) y por el CC 34 del canal 5.
+- **Color por nota** (opcional, apagado por defecto): cada clase de altura toma un color del círculo de quintas.
+
+Se ajusta con «armonía» y «color por nota» en la ventana **Nube**, o por `/fono/pinHarm` y `/fono/pinColor`.
+
+**Tabla MIDI y set.** En **Enlace OSC · MIDI**, «ver tabla completa» muestra cada CC, su parámetro y si es aprendido o por defecto. «Guardar set» descarga un archivo `.json` con el MIDI learn, el modo del teclado, el corte, las esquinas del morph, el patrón y todo el sonido. «Cargar set» lo restaura en otra máquina o el día de la función.
+
 ## Correrlo
 
 Es un solo archivo, sin dependencias ni compilación. Para que la carpeta `fotos/` se cargue automáticamente conviene servirlo por HTTP, con el puente o con:
@@ -87,7 +115,9 @@ y abrir `http://localhost:8000/`. Funciona sin conexión (Inter se carga de Goog
 |---|---|---|
 | ![Inicio](docs/capturas/01-inicio.png)<br>Pantalla de inicio / Start screen | ![Edición](docs/capturas/02-edicion.png)<br>Modo edición / Edit mode | ![HUD mínimo](docs/capturas/03-hud-minimo.png)<br>HUD mínimo (tecla h) / Minimal HUD (key h) |
 | ![Enlace OSC · MIDI](docs/capturas/04-enlace-osc-midi.png)<br>Enlace OSC · MIDI / OSC · MIDI link | ![Bordón y voz](docs/capturas/05-bordon-voz.png)<br>Bordón y su voz / Drone and its voice | ![MIDI learn](docs/capturas/06-midi-learn.png)<br>MIDI learn |
-| ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | ![Armonía y color](docs/capturas/08-armonia-color.png)<br>Armonía y color por nota / Harmony and colour by note | |
+| ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | ![Modo instrumento](docs/capturas/08-instrumento.png)<br>Modo instrumento (v081) / Instrument mode (v081) | ![Patrón](docs/capturas/09-patron.png)<br>Patrón y armonía desde el teclado / Pattern and keyboard harmony |
+| ![Morph](docs/capturas/10-morph.png)<br>Pad de morph XY / XY morph pad | ![Tabla MIDI](docs/capturas/11-tabla-midi.png)<br>Tabla completa de CC / Full CC table | ![La nube escucha](docs/capturas/12-nube-escucha.png)<br>La nube escucha (v082) / The cloud listens (v082) |
+| ![Armonía y color](docs/capturas/13-armonia-color.png)<br>Armonía y color por nota (v083) / Harmony and colour by note (v083) | | |
 
 ## Estilo
 
@@ -95,7 +125,9 @@ La interfaz sigue el skill [`alchemy-ui`](skills/alchemy-ui/SKILL.md) (tokens y 
 
 ## Versión
 
-v081: clavos con reparto teclado, eje frente/arriba, armonía (líneas, cohesión y temblor), formas por timbre y color por nota.
+v083: une las dos líneas de trabajo (modo instrumento y la nube escucha) y suma armonía: líneas entre zonas, cohesión y temblor según consonancia, tensión por OSC y CC 34, color por nota opcional.
+v082: la nube escucha — reparto «teclado», velocity en Z, intensidad en Y, pitch bend y aftertouch, subestructuras por timbre, granularidad por brillo y dispersión por reverb.
+v081: modo instrumento — morph XY, el teclado manda la armonía, patrón tipo arpegiador, tempo fijo, tabla MIDI y set en archivo (a partir de una idea de Maximiliano Wille con FM8).
 v080: clavos (cada nota levanta sus puntos de la nube; idea de Maximiliano Wille).
 v079: teclado MIDI (bordón polifónico, dividido, pedal, pitch bend, aftertouch, MIDI learn) y voz del bordón abierta.
 v078: enlace OSC · MIDI (envía y recibe) y puente OSC.
@@ -130,11 +162,7 @@ All three timbres are synthesized live, without samples. The bell uses inharmoni
 - **luz** (light): low in the dark areas, high in the bright ones.
 - **disperso** (scattered): each key sprinkled across the whole image.
 
-Since v081 there is also a **teclado** (keyboard) layout, with low notes on the left and high on the right. In every layout except scattered, each note nudges its neighbours, like finger pressure. Also:
-- Key velocity sets how far each pin rises and grows. Pins can rise **toward the viewer** (z axis) or **upward**.
-- **Harmony:** notes sounding together are joined by lines between their zones. Consonant intervals (octaves, fifths, thirds) give firm lines and the zone draws in. Clashing ones (seconds, tritone) open the zone, make it tremble and dash the line. Harmonic tension is also sent over OSC (`/fono/tension`) and CC 34.
-- **Shapes by timbre:** the bell gets orbiting satellites, the piano is a square, the bamboo jumps in grains and the drone has a breathing halo.
-- **Colour by note** (optional): each pitch class gets a hue around the circle of fifths, so harmonically close notes share close colours. Bells last longer than piano and bamboo, and the drone holds its pins while it sounds. Set it in the **Nube** window: pins, layout, pin height and tail. "Marcas" brings back the old circles.
+In height and light layouts each note also nudges its neighbours, like finger pressure. Bells last longer than piano and bamboo, and the drone holds its pins while it sounds. Set it in the **Nube** window: pins, layout, pin height and tail. "Marcas" brings back the old circles.
 
 **4. The drone.** A sustained voice of seven oscillators: body, sub, detuned saws, fifth and octave, through a filter that breathes with a slow LFO. You play it on the image, with pitch on the vertical axis and volume and brightness on the horizontal. Each extra finger adds a degree (thirds, fourths, cluster or octaves). It also plays from a MIDI keyboard, up to 4 notes at once. The **Bordón — voz** window opens its whole mix, filter, breathing, attack and release.
 
@@ -171,6 +199,16 @@ node puente/puente.js --out 127.0.0.1:1234 --in 9001
 
 Then open `http://localhost:8080`. The bridge serves the app and accepts several targets, such as a Tailscale IP for remote play. The full address, CC and channel map is in [`puente/LEEME.md`](puente/LEEME.md) (Spanish).
 
+### Instrument mode (v081)
+
+Made so a musician such as Maximiliano Wille can play Fonoestratonika on stage, inspired by FM8's Easy/Morph, arpeggiator and controller table. Two new dock windows:
+
+- **Instrument — morph:** an XY pad mixing four corner sounds (drone voice, density, tempo, mystery, brightness, edge noise, reverb, cloud and pins). "Suggested corners" builds four variants of the current sound; A–D store the current sound in a corner. X/Y on CC 18/19, MIDI learn and OSC (`/fono/mx`, `/fono/my`, `/fono/corner 0–3`, `/fono/morph`).
+- **Instrument — pattern:** *keyboard leads* — below the split (or the whole keyboard outside split mode) you play a chord and the generator improvises or arpeggiates over those notes; with no keys it waits, like an arpeggiator; *hold*, *key sync*, *also to the drone*. *Pattern*: 8–32 steps at 1/8 or 1/16 with step, accent, note (chord tone 1–4 or "·" = the photo decides), octave (−2…+2) and transpose (0–11). *Fixed tempo* 30–200 bpm (below 30 = photo tempo). OSC: `/fono/harm`, `/fono/hold`, `/fono/hnote note vel`, `/fono/hclear`, `/fono/pat`, `/fono/patLen`, `/fono/bpmFix`.
+- **The cloud listens (v082):** a "keyboard" pin layout (low notes left, high right); velocity pushes pins forward (Z), intensity lifts them while they sound (Y, "lift" slider), pitch bend shifts them sideways, aftertouch brightens them; bell opens rings, bamboo crumbles into dust, the drone breathes with its LFO; brightness makes pins grainier and reverb spreads them. The cloud stays white. Toggles in the **Cloud** window or `/fono/listen`, `/fono/pinSub`.
+- **Harmony (v083):** when several notes sound together, lines join their zones. Consonant intervals give firm lines and draw the zones in; clashing ones open them, make them tremble and dash the line. Harmonic tension (0–1) goes out on `/fono/tension` and CC 34. Optional colour by note follows the circle of fifths. `/fono/pinHarm`, `/fono/pinColor`.
+- **MIDI table and set:** in the OSC · MIDI link window, "full table" lists every CC; "save set" downloads a `.json` with MIDI learn, keyboard mode, split, morph corners, pattern and the whole sound; "load set" restores it.
+
 ### Run it
 
 Single file, no dependencies or build step. To auto-load `fotos/`, serve it over HTTP, with the bridge or with:
@@ -187,7 +225,9 @@ The UI follows the [`alchemy-ui`](skills/alchemy-ui/SKILL.md) skill (reusable to
 
 ### Version
 
-v081: pins with keyboard layout, front/up axis, harmony (lines, cohesion and tremble), shapes by timbre and colour by note.
+v083: merges both lines of work (instrument mode and the listening cloud) and adds harmony: lines between zones, cohesion and tremble by consonance, tension over OSC and CC 34, optional colour by note.
+v082: the cloud listens — keyboard layout, velocity on Z, intensity on Y, pitch bend and aftertouch, per-timbre substructures, grain from brightness and spread from reverb.
+v081: instrument mode — XY morph, keyboard-led harmony, arpeggiator-style pattern, fixed tempo, MIDI table and set file (from an idea by Maximiliano Wille with FM8).
 v080: pins (each note lifts its points in the cloud; idea by Maximiliano Wille).
 v079: MIDI keyboard (polyphonic drone, split, sustain, pitch bend, aftertouch, MIDI learn) and open drone voice.
 v078: OSC · MIDI link (send and receive) and OSC bridge.
