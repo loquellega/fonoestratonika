@@ -1,4 +1,4 @@
-# Fonoestratonika v083 · enlace OSC · MIDI
+# Fonoestratonika v084 · enlace OSC · MIDI
 
 Así se usa Fonoestratonika como instrumento dentro de otro sistema (Isadora, TouchDesigner, Max, Ableton, un sinte): envía sus notas y datos, y recibe control desde fuera.
 
@@ -79,6 +79,7 @@ Los datos continuos solo se envían cuando cambian.
 | `/fono/pins` | 1/0 clavos · `/fono/pinMap` 0 altura, 1 luz, 2 disperso, 3 teclado (v082) |
 | `/fono/listen` · `/fono/pinSub` | 1/0 la nube escucha · subestructuras (v082) |
 | `/fono/pinHarm` · `/fono/pinColor` | 1/0 armonía · color por nota (v083) |
+| `/fono/pinWave` | 0 rectas · 1 ondulan al bajar · 2 siempre (v084); `/fono/pinWaveA` cuánto ondulan |
 | `/fono/tick` | avanza un paso (con «seguir reloj externo») |
 | `/fono/harm` · `/fono/hold` · `/fono/pat` · `/fono/morph` | 1/0 (v081: el teclado manda, hold, patrón, morph) |
 | `/fono/hnote` | nota MIDI · velocidad (0 suelta) — nota de armonía (v081) |

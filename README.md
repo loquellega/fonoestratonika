@@ -97,6 +97,8 @@ Pensado para que un músico, como Maximiliano Wille, toque Fonoestratonika en un
 
 Se ajusta con «armonía» y «color por nota» en la ventana **Nube**, o por `/fono/pinHarm` y `/fono/pinColor`.
 
+**Ondas (v084).** Idea de Maximiliano Wille. La extensión de cada clavo ya no es una línea recta: ondula mientras el clavo baja, en el retroceso de la nota. La fuerza de la nota (velocity) decide la velocidad de la onda. La base y la punta quedan quietas y ondula el medio. En la ventana **Nube** se elige si las extensiones son rectas, ondulan al bajar o siempre, y cuánto ondulan. Por OSC: `/fono/pinWave 0–2` y `/fono/pinWaveA`.
+
 **Tabla MIDI y set.** En **Enlace OSC · MIDI**, «ver tabla completa» muestra cada CC, su parámetro y si es aprendido o por defecto. «Guardar set» descarga un archivo `.json` con el MIDI learn, el modo del teclado, el corte, las esquinas del morph, el patrón y todo el sonido. «Cargar set» lo restaura en otra máquina o el día de la función.
 
 ## Correrlo
@@ -117,7 +119,7 @@ y abrir `http://localhost:8000/`. Funciona sin conexión (Inter se carga de Goog
 | ![Enlace OSC · MIDI](docs/capturas/04-enlace-osc-midi.png)<br>Enlace OSC · MIDI / OSC · MIDI link | ![Bordón y voz](docs/capturas/05-bordon-voz.png)<br>Bordón y su voz / Drone and its voice | ![MIDI learn](docs/capturas/06-midi-learn.png)<br>MIDI learn |
 | ![Clavos](docs/capturas/07-clavos.png)<br>Clavos: un acorde levanta sus puntos / Pins: a chord lifts its points | ![Modo instrumento](docs/capturas/08-instrumento.png)<br>Modo instrumento (v081) / Instrument mode (v081) | ![Patrón](docs/capturas/09-patron.png)<br>Patrón y armonía desde el teclado / Pattern and keyboard harmony |
 | ![Morph](docs/capturas/10-morph.png)<br>Pad de morph XY / XY morph pad | ![Tabla MIDI](docs/capturas/11-tabla-midi.png)<br>Tabla completa de CC / Full CC table | ![La nube escucha](docs/capturas/12-nube-escucha.png)<br>La nube escucha (v082) / The cloud listens (v082) |
-| ![Armonía y color](docs/capturas/13-armonia-color.png)<br>Armonía y color por nota (v083) / Harmony and colour by note (v083) | | |
+| ![Armonía y color](docs/capturas/13-armonia-color.png)<br>Armonía y color por nota (v083) / Harmony and colour by note (v083) | ![Ondas](docs/capturas/14-ondas.png)<br>Extensiones que ondulan al bajar (v084) / Extensions waving on release (v084) | |
 
 ## Estilo
 
@@ -125,6 +127,7 @@ La interfaz sigue el skill [`alchemy-ui`](skills/alchemy-ui/SKILL.md) (tokens y 
 
 ## Versión
 
+v084: ondas, las extensiones de los clavos ondulan al bajar y la velocity decide la velocidad (idea de Maximiliano Wille).
 v083: une las dos líneas de trabajo (modo instrumento y la nube escucha) y suma armonía: líneas entre zonas, cohesión y temblor según consonancia, tensión por OSC y CC 34, color por nota opcional.
 v082: la nube escucha — reparto «teclado», velocity en Z, intensidad en Y, pitch bend y aftertouch, subestructuras por timbre, granularidad por brillo y dispersión por reverb.
 v081: modo instrumento — morph XY, el teclado manda la armonía, patrón tipo arpegiador, tempo fijo, tabla MIDI y set en archivo (a partir de una idea de Maximiliano Wille con FM8).
@@ -207,6 +210,7 @@ Made so a musician such as Maximiliano Wille can play Fonoestratonika on stage, 
 - **Instrument — pattern:** *keyboard leads* — below the split (or the whole keyboard outside split mode) you play a chord and the generator improvises or arpeggiates over those notes; with no keys it waits, like an arpeggiator; *hold*, *key sync*, *also to the drone*. *Pattern*: 8–32 steps at 1/8 or 1/16 with step, accent, note (chord tone 1–4 or "·" = the photo decides), octave (−2…+2) and transpose (0–11). *Fixed tempo* 30–200 bpm (below 30 = photo tempo). OSC: `/fono/harm`, `/fono/hold`, `/fono/hnote note vel`, `/fono/hclear`, `/fono/pat`, `/fono/patLen`, `/fono/bpmFix`.
 - **The cloud listens (v082):** a "keyboard" pin layout (low notes left, high right); velocity pushes pins forward (Z), intensity lifts them while they sound (Y, "lift" slider), pitch bend shifts them sideways, aftertouch brightens them; bell opens rings, bamboo crumbles into dust, the drone breathes with its LFO; brightness makes pins grainier and reverb spreads them. The cloud stays white. Toggles in the **Cloud** window or `/fono/listen`, `/fono/pinSub`.
 - **Harmony (v083):** when several notes sound together, lines join their zones. Consonant intervals give firm lines and draw the zones in; clashing ones open them, make them tremble and dash the line. Harmonic tension (0–1) goes out on `/fono/tension` and CC 34. Optional colour by note follows the circle of fifths. `/fono/pinHarm`, `/fono/pinColor`.
+- **Waves (v084):** an idea by Maximiliano Wille. Each pin's extension undulates while the pin falls back (the note's release). Note velocity sets the wave speed; base and tip stay still. Choose straight, waves on release or always, plus amount, in the **Nube** window or via `/fono/pinWave 0–2` and `/fono/pinWaveA`.
 - **MIDI table and set:** in the OSC · MIDI link window, "full table" lists every CC; "save set" downloads a `.json` with MIDI learn, keyboard mode, split, morph corners, pattern and the whole sound; "load set" restores it.
 
 ### Run it
@@ -225,6 +229,7 @@ The UI follows the [`alchemy-ui`](skills/alchemy-ui/SKILL.md) skill (reusable to
 
 ### Version
 
+v084: waves, pin extensions undulate on release with speed set by velocity (idea by Maximiliano Wille).
 v083: merges both lines of work (instrument mode and the listening cloud) and adds harmony: lines between zones, cohesion and tremble by consonance, tension over OSC and CC 34, optional colour by note.
 v082: the cloud listens — keyboard layout, velocity on Z, intensity on Y, pitch bend and aftertouch, per-timbre substructures, grain from brightness and spread from reverb.
 v081: instrument mode — XY morph, keyboard-led harmony, arpeggiator-style pattern, fixed tempo, MIDI table and set file (from an idea by Maximiliano Wille with FM8).
